@@ -1,78 +1,55 @@
 
+   import java.util.Random;
+   
    public class Pokemon {
     
     //attribute
 
-      public String Name;
-      private String Type;
-      private int Level = 1;
-      private int HP;]
-      private int ATK;
-      private int DEF;
+      private String species;
+      private String name;
+      private boolean checkChangeName = true;
+      private String type ;
+      private int level;
+      private int hp;
+      private int atk;
+      private int def;
+      private int baseHp = 30;
+      private int baseAtk = 56;
+      private int baseDef = 35;
+      Random rand = new Random(); 
+      
   
       //method
 
-      public void attack(){
+      public Pokemon ()
+    {   
 
-      }
-      public void eat(){
-        System.out.println(Name + " Eat berry.") ;
-      };
-     
-      public void sleep(){
-        System.out.println(Name + " is fast asleep.") ;
-
-      };
-      public void faint()
+        name = species;
+        level =  rand.nextInt(9) + 2;
+        type = "normal";
+        hp =  (int) ( (baseHp * 2) * (level/100.0)) + level +10;
+        atk = (int) ( (baseAtk * 2) * (level/100.0)) + 5;
+        def = (int) ( (baseDef * 2) * (level/100.0)) + 5 ;
+    }
+      
+      public void showStatus ()
       {
-          HP = 0 ;
-          System.out.println(Name + " fainted!!") ;
-      };
-
-      public void giveName(String Name){
-
-        this.Name = Name;
-
+        System.out.println(level);   
+        System.out.println(hp); 
+        System.out.println(atk);   
+        System.out.println(def);    
+        
       }
 
-      public String getName(){
-
-        return this.Name;
+      public void changeName(){
+       
+        if (checkChangeName)
+        {
+          System.out.println("Would you like to give " + name + " a nickname");
+          checkChangeName = false;
+        }
+        else System.out.print("You can't change name anymore!!!");
       }
-     
-      public void setHP(int HP){
-
-        this.HP = HP;
-
-      }
-
-      public int getHP(){
-
-        return this.HP;
-      }
-    
-    
-      public int getATK(){
-
-        return this.ATK;
-      }
-
-      public int getDEF(){
-
-        return this.DEF;
 
       
-      }
-
-      public void setATK (int ATK){
-
-        this.ATK =ATK;
-
-      }
-
-      public void setDEF(int DEF){
-
-        this.DEF = DEF;
-
-      }
     }
