@@ -16,9 +16,9 @@
       private int atk;
       private int def;
       private int damage;
-      private int baseHp = 30;
-      private int baseAtk = 56;
-      private int baseDef = 35;
+      private int baseHp;
+      private int baseAtk;
+      private int baseDef;
      
   
       //method
@@ -29,6 +29,9 @@
         name = species;
         level =  rand.nextInt(9) + 2;
         type = "Normal";
+        baseHp = 30;
+        baseAtk = 56;
+        baseDef = 35;
         hp =  (int) ( (baseHp * 2) * (level/100.0)) + level +10;
         atk = (int) ( (baseAtk * 2) * (level/100.0)) + 5;
         def = (int) ( (baseDef * 2) * (level/100.0)) + 5 ;
@@ -47,15 +50,39 @@
       }
 
       public void changeName(){
-       
+        
+        boolean yesNo = false;
+
         if (checkChangeName)
         {
-          System.out.print("\nGive " + name + " a nickname: ");
-          name = scan.nextLine();
-          checkChangeName = false;
+
+            do{
+
+              System.out.print("\nWould you like to give " + name + " a nickname (y/n):  ");
+              char ans = scan.next().charAt(0);
+              scan.nextLine();
+
+
+               if(ans=='y'){
+                    System.out.print("Give " + name + " a nickname: ");
+                    name = scan.nextLine();
+                    checkChangeName = false;
+                    yesNo = true;
+                 }
+
+                else if (ans=='n'){
+                    System.out.print("\nYou haven't change " + name + "'s name.\n");
+                    yesNo = true;
+                 }
+
+                else  System.out.print("PRESS y or n");
         }
+             while(yesNo == false);
+      }
+
         else System.out.println("\nYou can't change name anymore!!!");
       }
+
 
       public void eatBerry(){
         if (damage == 0)
