@@ -16,7 +16,7 @@ public abstract class Berry {
     
     }
 
-    public abstract void statsBoost(int boostValue, Pokemon poke);
+    public abstract void statsBoost(Pokemon poke);
 
     public String getName()
       {
