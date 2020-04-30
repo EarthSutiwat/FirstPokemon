@@ -50,12 +50,13 @@ public class StartGame extends JFrame{
         startButton.setBackground(Color.white);
         startButton.setForeground(Color.black); 
         startButton.setFont(large);
-        content.add(startButton);
+        startButton.setFocusPainted(false);
        
            
         quitButton.setBackground(Color.white);
         quitButton.setForeground(Color.black); 
         quitButton.setFont(large);
+        quitButton.setFocusPainted(false);
         
         menuPanel.add(startButton); 
         menuPanel.add(quitButton);  
