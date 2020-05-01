@@ -13,7 +13,7 @@ public class MainGame extends JFrame  {
     JButton button1 , button2, button3, button4;
     JButton returnButton;
     String position;
-    Pokemon p;
+    Pokemon wildPokemon;
 
 
     public MainGame(Trainer trainer){
@@ -108,7 +108,7 @@ public class MainGame extends JFrame  {
         position = "Main";
         button1.setText("My Pokemon");
         button2.setText("Search Wild Pokemon");
-        button3.setText("Bag");
+        button3.setText("Items");
         button4.setText("");
         returnButton.setVisible(false);
         
@@ -122,21 +122,14 @@ public class MainGame extends JFrame  {
         position = "Search";
         button1.setText("Fight");
         button2.setText("Run");
-        Pokemon wildPokemon = trainer.search();
+        button3.setText("");
+        wildPokemon = trainer.search();
         text.setText("<html>"+"You encountered a wild " + wildPokemon.getName() + "!<br>HP:" + wildPokemon.getHp() + "  Lv." + wildPokemon.getLevel() + "</html>");
         //hideButton();
        
     }
 
-    public void fightPokemon(Trainer trainer){
-
-        position = "Fight";
-        text.setText("Select your move to fight");
-        button1.setText("1");
-        button2.setText("2");
-        button3.setText("3");
-        button4.setText("4");
-    }
+   
 
     public void pokemonBox(){
 
@@ -144,7 +137,19 @@ public class MainGame extends JFrame  {
         button1.setText("View Pokemon");
         button2.setText("Check Status");
         button3.setText("Change name");
-        button4.setText("Evolve Pokemon");
+        returnButton.setVisible(true);
+
+    }
+
+    public void openItems(){
+
+
+        position = "Item";
+        button1.setText("Razz Berry");
+        button2.setText("Pinab Berry");
+        button3.setText("Nanab Berry");
+        button4.setText("Pomeg Berry");
+        text.setText("Choose berry you want to use");
         returnButton.setVisible(true);
 
     }
@@ -175,14 +180,14 @@ public class MainGame extends JFrame  {
                     switch(chosenChoice){
                     case "choice1" : pokemonBox();   break;
                     case "choice2" : searchPokeMenu(trainer); break;
-                    case "choice3" : break;
+                    case "choice3" : openItems(); break;
                     case "choice4" : break;
                     }
                     break;
 
             case "Search":
                     switch(chosenChoice){
-                    case "choice1" : new ChoosePokemon(trainer,"4"); break;
+                    case "choice1" : new FightWildPokemon(trainer,wildPokemon); mainMenu(false); break;
                     case "choice2" : mainMenu(false); break;
                     case "choice3" : break;
                     case "choice4" : break;
@@ -198,10 +203,17 @@ public class MainGame extends JFrame  {
                     }
                     break;
 
-            case "Fight":
+            case "Item":
                     switch(chosenChoice){
-                        case "choice1" :  
+                    case "choice1" : new ChoosePokemon(trainer,"razz"); break;
+                    case "choice2" : new ChoosePokemon(trainer,"pinab"); break;
+                    case "choice3" : new ChoosePokemon(trainer,"nanab"); break;
+                    case "choice4" : new ChoosePokemon(trainer,"pomeg"); break;
                     }
+
+           
+
+            
                     
             }
 
