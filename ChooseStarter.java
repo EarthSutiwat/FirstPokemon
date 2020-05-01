@@ -103,7 +103,7 @@ public class ChooseStarter extends JFrame{
 
         grimerBt.addActionListener (new ActionListener () {
             public void actionPerformed (ActionEvent e) {
-            trainer.myPokemon.add(new Grimer("Grimer",2) );
+            trainer.myPokemon.add(new Grimer("Grimer",5) );
             text.setText("You chose Grimer!!");
             afterChoose();
             choosePokeLabel.setIcon(grimerPic);
@@ -112,7 +112,7 @@ public class ChooseStarter extends JFrame{
 
         ekansBt.addActionListener (new ActionListener () {
            public void actionPerformed (ActionEvent e) {
-            trainer.myPokemon.add(new Ekans("Ekans",2) );
+            trainer.myPokemon.add(new Ekans("Ekans",5) );
             text.setText("You chose Ekans!!");
             afterChoose();
             choosePokeLabel.setIcon(ekansPic);
@@ -122,7 +122,7 @@ public class ChooseStarter extends JFrame{
         
            koffingBt.addActionListener (new ActionListener () {
             public void actionPerformed (ActionEvent e) {
-                trainer.myPokemon.add(new Koffing("Koffing",2) );
+                trainer.myPokemon.add(new Koffing("Koffing",5) );
                 text.setText("You chose Koffing!!");
                 afterChoose();
                 choosePokeLabel.setIcon(koffingPic);
@@ -152,6 +152,7 @@ public class ChooseStarter extends JFrame{
         nextButton.setVisible(true);
         
     }
+    
     
    
     

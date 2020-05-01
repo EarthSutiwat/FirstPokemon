@@ -9,7 +9,8 @@ public class PokemonGame{
 
        Trainer player1 = new Trainer("A");
        StartGame start = new StartGame(player1);
-        
+       
+       
 
     }
 

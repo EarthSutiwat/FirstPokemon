@@ -3,7 +3,7 @@ import javax.swing.*;
 public class PomegBerry extends Berry{
 
 
-    public PomegBerry(Pokemon poke){
+    public PomegBerry(String name){
 
         super("Pomeg Berry");
         hpHeal = 50;

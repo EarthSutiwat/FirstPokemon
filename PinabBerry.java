@@ -3,10 +3,10 @@ import javax.swing.*;
 public class PinabBerry extends Berry{
 
 
-    public PinabBerry(Pokemon poke){
+    public PinabBerry(String name){
 
         super("Pinab Berry");
-        defBoost = 15;
+        defBoost = 5;
         berryIcon = new ImageIcon(".//picture//pinabBerry.jpg");
     }
 

@@ -29,7 +29,7 @@ public class ShowStatus extends JFrame{
         nameLabel.setBounds(120, 20, 200, 50);
         nameLabel.setFont(normal);
 
-        hpLabel.setText("HP: "+poke.getHp() + "/" + poke.getCurHp());
+        hpLabel.setText("HP: "+poke.getCurHp() + "/" + poke.getHp());
         hpLabel.setBounds(160,70,200,50);
         hpLabel.setFont(normal);
 

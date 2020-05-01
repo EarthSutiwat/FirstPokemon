@@ -1,100 +1,157 @@
-  import java.util.Scanner;
-   import java.util.Random;
-   
-   public class Pokemon {
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Random;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;    
+
+  
+   public abstract class Pokemon  {
     
     //attribute
 
     Random rand = new Random(); 
     Scanner scan = new Scanner (System.in); 
-      private String species;
-      private String name;
-      private boolean checkChangeName = true;
-      private String type ;
-      private int level;
-      private int hp;
-      private int atk;
-      private int def;
-      private int damage;
-      private int baseHp;
-      private int baseAtk;
-      private int baseDef;
+      protected String name;
+      protected int level;
+      protected int exp, maxExp;
+      protected int hp,curHp;
+      protected int atk;
+      protected int def;
+      protected int baseHp;
+      protected int baseAtk;
+      protected int baseDef;
+      protected int damage;
+      protected ImageIcon pokeIcon;
+      protected ImageIcon pokeImg;
+      protected ArrayList<String> moves;
+     
      
   
       //method
 
-      public Pokemon ()
+      public Pokemon (String name , int baseLevel)
     {   
-        species = "Rattata";
-        name = species;
-        level =  rand.nextInt(9) + 2;
-        type = "Normal";
-        baseHp = 30;
-        baseAtk = 56;
-        baseDef = 35;
-        hp =  (int) ( (baseHp * 2) * (level/100.0)) + level +10;
-        atk = (int) ( (baseAtk * 2) * (level/100.0)) + 5;
-        def = (int) ( (baseDef * 2) * (level/100.0)) + 5 ;
-        damage = 0;
+        this.name = name ;
+        this.level = baseLevel;
+
+        maxExp = level*10;
+        hp =  hpCal(baseHp);
+        atk = statsCal(baseAtk);
+        def = statsCal(baseDef);
+        curHp = hp;
     }
       
-      public void showStatus ()
+      public abstract void  attack(Pokemon enemy, String move);
+
+      private int hpCal(int baseStats){
+       int stats = (int) ( (baseHp * 2) * (this.level/100.0)) + this.level + 10;
+        return stats;
+      }
+
+      private int statsCal(int baseStats){
+        int stats = (int) ( (baseStats * 2) * (this.level/100.0)) + 5 ;
+        return stats;
+      }
+
+      public void getDamaged(int value,int enemyAtk,int enemyLevel)
       {
-        System.out.println("\nName: " +name);
-        System.out.println("Type: " +type);
-        System.out.println("Level: " +level);   
-        System.out.println("HP: " + (hp-damage) + " / " +hp ); 
-        System.out.println("ATK: " +atk);   
-        System.out.println("DEF: " +def);    
-        
-      }
+        damage = (int) ( ( (enemyLevel*2) / 5)  * value *(enemyAtk / this.def) ) / 50 ;
 
-      public void changeName(){
-        
-        boolean yesNo = false;
-
-        if (checkChangeName)
-        {
-
-            do{
-
-              System.out.print("\nWould you like to give " + name + " a nickname (y/n):  ");
-              char ans = scan.next().charAt(0);
-              scan.nextLine();
-
-
-               if(ans=='y'){
-                    System.out.print("Give " + name + " a nickname: ");
-                    name = scan.nextLine();
-                    checkChangeName = false;
-                    yesNo = true;
-                 }
-
-                else if (ans=='n'){
-                    System.out.print("\nYou haven't change " + name + "'s name.\n");
-                    yesNo = true;
-                 }
-
-                else  System.out.print("PRESS y or n");
+        if (damage<=0)
+          damage = 1;
+      
+        if ( (this.curHp - damage) > 0){
+          this.curHp -= damage;
         }
-             while(yesNo == false);
+        else this.curHp = 0;
       }
 
-        else System.out.println("\nYou can't change name anymore!!!");
-      }
+     
+      public void receivedExp(int expReceived){
+          int curExp = exp;
+          curExp += expReceived;
+          setExp(curExp);
 
-
-      public void eatBerry(){
-        if (damage == 0)
-          System.out.println("\nNo!!! " + name + " is full.");
-        else {
-
-          System.out.println( name + " is eating berry.");
-
-            if(damage-10 < 0)
-              damage = 0;
-            else damage -= 10;
+          if (exp >= maxExp) {
+            exp = exp % maxExp;
+            levelUp();
+          }
         }
+      private void levelUp(){
+        level++; 
+        maxExp += (this.level * 10);
+        statsUp();
+        curHp = hp;
+      }
+
+      private void statsUp(){
+        hp =  hpCal(baseHp);
+        atk = statsCal(baseAtk);
+        def = statsCal(baseDef);
+      }
+        
+      public int getAtk(){
+        return atk;
+      }
+
+      public int getDef(){
+        return def;
+      }
+
+
+      public void setExp(int exp){
+        this.exp = exp;
+      }
+      public int getExp(){
+        return exp;
+      }
+
+      public int getMaxExp(){
+        return maxExp;
+      }
+
+      public int getHp(){
+        return hp;
+      } 
+
+      public int getCurHp(){
+        return curHp;
+      } 
+
+      public ImageIcon getIcon(){
+
+        return pokeIcon;
+      }
+
+      public ImageIcon getImg(){
+        
+        return pokeImg;
+      }
+
+      public int getLevel(){
+        return level;
       }
       
+      public String getName()
+      {
+        return name;
+      }
+
+      public void setName(String name){
+        
+        this.name = name;
     }
+
+      public String toString()
+      {
+        return name;
+      }
+      
+      public ArrayList<String> getMoves()
+    {
+        return this.moves;
+    }
+    
+      
+    }
+  
